@@ -43,6 +43,19 @@ public class TrainingRecord {
         }
         return result;
     } // newLookupEntry
+
+    // checks if a record already exists based on the name, day, month, and year entries
+    public boolean checkUniqueness(String n, int d, int m, int y) {
+        ListIterator<Entry> iter = tr.listIterator();
+        boolean recordFound = false;
+        while (iter.hasNext()) {
+            Entry current = iter.next();
+            if (current.getDay()==d && current.getMonth()==m && current.getYear()==y)
+                recordFound = true;
+            break;
+        }
+        return recordFound;
+    }
    
    // Count the number of entries
    public int getNumberOfEntries(){
