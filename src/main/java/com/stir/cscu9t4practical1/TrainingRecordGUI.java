@@ -40,6 +40,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton addR = new JButton("Add");
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton findAllByDate = new JButton("FindAllByDate");
+    private JButton findAllByName = new JButton("FindAllByName");
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -101,6 +102,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         lookUpByDate.addActionListener(this);
         add(findAllByDate);
         findAllByDate.addActionListener(this);
+        add(findAllByName);
+        findAllByName.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(720, 200);
@@ -123,6 +126,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == findAllByDate) {
             message = newLookupEntry();
+        }
+        if (event.getSource() == findAllByName) {
+            message = findAllByName();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -196,11 +202,27 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         return message;
     }
 
+    /**
+     * Calls on helper method in TrainingRecord class to look for entries with given
+     * day, month, and year
+     * @return - Either an empty result or the entries found
+     */
     public String newLookupEntry() {
         int m = Integer.parseInt(month.getText());
         int d = Integer.parseInt(day.getText());
         int y = Integer.parseInt(year.getText());
         String message = myAthletes.newLookupEntry(d, m, y);
+        return message;
+    }
+
+    /**
+     * Calls on helper method in TrainingRecord class to look for entries with given
+     * name
+     * @return - Either an empty result or the entries found
+     */
+    public String findAllByName() {
+        String n = name.getText();
+        String message = myAthletes.findAllByName(n);
         return message;
     }
 
@@ -213,6 +235,13 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         mins.setText("");
         secs.setText("");
         dist.setText("");
+        entryTypeField.setText("");
+        sprintRepetitionsField.setText("");
+        sprintRecoveryField.setText("");
+        cycleTerrainField.setText("");
+        cycleTempoField.setText("");
+        swimWhereField.setText("");
+
 
     }// blankDisplay
     // Fills the input fields on the display for testing purposes only

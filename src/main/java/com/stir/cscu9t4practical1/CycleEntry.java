@@ -35,7 +35,7 @@ public class CycleEntry extends Entry{
     public String getEntry () {
         String result = super.getName()+" cycled " + super.getDistance() + " km in " +super.getHour()+
                 ":"+super.getMin()+":"+ super.getSec() + " on " + super.getDay()+ "/"+super.getMonth()+
-                "/"+super.getYear()+" on "+getTerrain()+" at "+getTempo()+" tempo\n";
+                "/"+super.getYear()+" on "+getTerrain()+" terrain at "+getTempo()+" tempo\n";
         return result;
     } //getEntry
 }

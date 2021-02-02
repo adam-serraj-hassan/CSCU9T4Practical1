@@ -66,7 +66,7 @@ public class TrainingRecord {
      * @param d
      * @param m
      * @param y
-     * @return - Either an empty result or the entry found
+     * @return - Either an empty result or the entries found
      */
     public String newLookupEntry(int d, int m, int y) {
         ListIterator<Entry> iter = tr.listIterator();
@@ -98,6 +98,42 @@ public class TrainingRecord {
             break;
         }
         return recordFound;
+    }
+
+    /**
+     * Returns all entries corresponding to a given name
+     * @param name - Name whose corresponding entries are to be found
+     * @return - Entries found
+     */
+    public String findAllByName(String name) {
+        String result = "";
+        ListIterator<Entry> entryIterator = tr.listIterator();
+        while (entryIterator.hasNext()) {
+            Entry current = entryIterator.next();
+            if (current.getName().equals(name))
+                result += current.getEntry() + "";
+        }
+
+        ListIterator<SprintEntry> sprintIterator = sprintEntryList.listIterator();
+        while (sprintIterator.hasNext()) {
+            SprintEntry current = sprintIterator.next();
+            if (current.getName().equals(name))
+                result += current.getEntry() + "";
+        }
+
+        ListIterator<CycleEntry> cycleIterator = cycleEntryList.listIterator();
+        while (cycleIterator.hasNext()) {
+            Entry current = cycleIterator.next();
+            if (current.getName().equals(name))
+                result += current.getEntry() + "";
+        }
+        ListIterator<SwimEntry> swimIterator = swimEntryList.listIterator();
+        while (swimIterator.hasNext()) {
+            SwimEntry current = swimIterator.next();
+            if (current.getName().equals(name))
+                result += current.getEntry() + "";
+        }
+        return result;
     }
    
    // Count the number of entries
