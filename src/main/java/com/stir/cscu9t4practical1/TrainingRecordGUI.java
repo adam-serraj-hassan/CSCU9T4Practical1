@@ -41,6 +41,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton findAllByDate = new JButton("FindAllByDate");
     private JButton findAllByName = new JButton("FindAllByName");
+    private JButton removeButton = new JButton("Remove");
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -104,6 +105,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         findAllByDate.addActionListener(this);
         add(findAllByName);
         findAllByName.addActionListener(this);
+        add(removeButton);
+        removeButton.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(720, 200);
@@ -129,6 +132,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == findAllByName) {
             message = findAllByName();
+        }
+        if (event.getSource() == removeButton) {
+            message = remove();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -223,6 +229,21 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     public String findAllByName() {
         String n = name.getText();
         String message = myAthletes.findAllByName(n);
+        return message;
+    }
+
+    /**
+     * Calls on helper method in TrainingRecord class to remove an Entry corresponding to
+     * a specific name, day, month, and year
+     * @return
+     */
+    public String remove() {
+        String n = name.getText();
+        int m = Integer.parseInt(month.getText());
+        int d = Integer.parseInt(day.getText());
+        int y = Integer.parseInt(year.getText());
+
+        String message = myAthletes.remove(n, m, d, y);
         return message;
     }
 

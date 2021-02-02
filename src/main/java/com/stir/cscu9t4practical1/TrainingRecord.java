@@ -135,6 +135,27 @@ public class TrainingRecord {
         }
         return result;
     }
+
+    /**
+     * Removes an Entry corresponding to a specific name, day, month, and year
+     * @param name - Name of athlete
+     * @param d - Day of entry
+     * @param m - Month of entry
+     * @param y - Year of entry
+     * @return - A String stating where the Entry was removed or not
+     */
+    public String remove(String name, int d, int m, int y) {
+        ListIterator<Entry> entryIterator = tr.listIterator();
+        while (entryIterator.hasNext()) {
+            Entry current = entryIterator.next();
+            if (current.getName().equals(name) && current.getDay()==d &&
+                    current.getMonth()==m && current.getYear()==y) {
+                tr.remove(current);
+                return "Entry removed!";
+            }
+        }
+        return "Entry was not found, so it couldn't be removed!";
+    }
    
    // Count the number of entries
    public int getNumberOfEntries(){
