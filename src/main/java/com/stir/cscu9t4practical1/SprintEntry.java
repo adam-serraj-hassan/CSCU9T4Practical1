@@ -12,14 +12,26 @@ public class SprintEntry extends Entry{
         this.recovery = recovery;
     }
 
+    /**
+     * Accessor method for repetitions
+     * @return - repetitions
+     */
     public int getRepetitions() {
         return repetitions;
     }
 
+    /**
+     * Accessor method for recovery
+     * @return - recovery
+     */
     public int getRecovery() {
         return recovery;
     }
 
+    /**
+     *
+     * @return - Entry being looked for
+     */
     public String getEntry () {
         String result = super.getName()+" sprinted " + getRepetitions() + "x" +
                 super.getDistance() + "m in "+super.getHour()+ ":"+super.getMin()+

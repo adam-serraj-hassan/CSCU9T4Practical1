@@ -10,10 +10,18 @@ public class SwimEntry extends Entry{
         this.where = where;
     }
 
+    /**
+     * Accessor method for where
+     * @return - where
+     */
     public String getWhere() {
         return where;
     }
 
+    /**
+     *
+     * @return - Entry being looked for
+     */
     public String getEntry () {
         String result = super.getName()+" swam " + getDistance() + " km "+ getWhere() +
                 " in " +getHour()+":"+getMin()+":"+ getSec() + " on "+super.getDay()+ "/"+

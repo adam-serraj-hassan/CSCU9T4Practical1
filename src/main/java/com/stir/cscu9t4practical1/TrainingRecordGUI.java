@@ -25,6 +25,18 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JLabel labmm = new JLabel(" Mins:");
     private JLabel labs = new JLabel(" Secs:");
     private JLabel labdist = new JLabel(" Distance (km):");
+    private JLabel entryTypeLabel = new JLabel("Entry type (Sprint/Cycle/Swim):");
+    private JTextField entryTypeField = new JTextField(6);
+    private JLabel sprintRepetitionsLabel = new JLabel("Sprint repetitions:");
+    private JTextField sprintRepetitionsField = new JTextField(10);
+    private JLabel sprintRecoveryLabel = new JLabel("Sprint recovery:");
+    private JTextField sprintRecoveryField = new JTextField(10);
+    private JLabel cycleTerrainLabel = new JLabel("Cycle terrain:");
+    private JTextField cycleTerrainField = new JTextField(10);
+    private JLabel cycleTempoLabel = new JLabel("Cycle tempo:");
+    private JTextField cycleTempoField = new JTextField(10);
+    private JLabel swimWhereLabel = new JLabel("Swim location (pool/outdoors):");
+    private JTextField swimWhereField = new JTextField(10);
     private JButton addR = new JButton("Add");
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton findAllByDate = new JButton("FindAllByDate");
@@ -65,6 +77,24 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         add(labdist);
         add(dist);
         dist.setEditable(true);
+        add(entryTypeLabel);
+        add(entryTypeField);
+        entryTypeField.setEditable(true);
+        add(sprintRepetitionsLabel);
+        add(sprintRepetitionsField);
+        sprintRepetitionsField.setEditable(true);
+        add(sprintRecoveryLabel);
+        add(sprintRecoveryField);
+        sprintRecoveryField.setEditable(true);
+        add(cycleTerrainLabel);
+        add(cycleTerrainField);
+        cycleTerrainField.setEditable(true);
+        add(cycleTempoLabel);
+        add(cycleTempoField);
+        cycleTempoField.setEditable(true);
+        add(swimWhereLabel);
+        add(swimWhereField);
+        swimWhereField.setEditable(true);
         add(addR);
         addR.addActionListener(this);
         add(lookUpByDate);
@@ -109,17 +139,45 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             int h = Integer.parseInt(hours.getText());
             int mm = Integer.parseInt(mins.getText());
             int s = Integer.parseInt(secs.getText());
+            String entryType = entryTypeField.getText();
 
-            // checks if the record inputted already exists
-            if(myAthletes.checkUniqueness(n, d, m, y)) {
-                message = n + " has already ran on this day!";
+            // check what type of entry has been added
+            if (n.isEmpty()) {
+                message = "Name can't be empty!";
+            } else if(entryType.equals("Sprint")) {
+                int sprintRepetitions = Integer.parseInt(sprintRepetitionsField.getText());
+                int recovery = Integer.parseInt(sprintRecoveryField.getText());
+
+                SprintEntry sprintEntry = new SprintEntry(n, d, m, y, h, mm, s, km,
+                        sprintRepetitions, recovery);
+                myAthletes.addSprintEntry(sprintEntry);
+                System.out.println("Adding sprint entry to the records");
+                message = "Record added\n";
+
+            } else if(entryType.equals("Cycle")) {
+                String terrain = cycleTerrainField.getText();
+                String tempo = cycleTempoField.getText();
+
+                CycleEntry cycleEntry = new CycleEntry(n, d, m, y, h, mm, s, km, terrain, tempo);
+                myAthletes.addCycleEntry(cycleEntry);
+                System.out.println("Adding cycle entry to the records");
+                message = "Record added\n";
+
+            } else if(entryType.equals("Swim")) {
+                String swimWhere = swimWhereField.getText();
+
+                SwimEntry swimEntry = new SwimEntry(n, d, m, y, h, mm, s, km, swimWhere);
+                myAthletes.addSwimEntry(swimEntry);
+                System.out.println("Adding swim entry to the records");
+                message = "Record added\n";
+
             } else {
-                if(n.isEmpty()) {
-                    message = "Name can't be empty!";
+                if(myAthletes.checkUniqueness(n, d, m, y)) {
+                    message = "Entry already exists!";
                 } else {
                     Entry e = new Entry(n, d, m, y, h, mm, s, km);
                     myAthletes.addEntry(e);
-                    System.out.println("Adding "+what+" entry to the records");
+                    System.out.println("Adding " + what + " entry to the records");
                     message = "Record added\n";
                 }
             }

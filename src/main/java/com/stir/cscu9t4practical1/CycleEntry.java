@@ -12,14 +12,26 @@ public class CycleEntry extends Entry{
         this.tempo = tempo;
     }
 
+    /**
+     * Accessor method for terrain
+     * @return - terrain
+     */
     public String getTerrain() {
         return terrain;
     }
 
+    /**
+     * Accessor method for tempo
+     * @return - tempo
+     */
     public String getTempo() {
         return tempo;
     }
 
+    /**
+     *
+     * @return - Entry being looked for
+     */
     public String getEntry () {
         String result = super.getName()+" cycled " + super.getDistance() + " km in " +super.getHour()+
                 ":"+super.getMin()+":"+ super.getSec() + " on " + super.getDay()+ "/"+super.getMonth()+
