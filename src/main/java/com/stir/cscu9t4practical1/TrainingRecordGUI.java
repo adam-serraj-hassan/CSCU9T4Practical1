@@ -101,12 +101,16 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         addR.addActionListener(this);
         add(lookUpByDate);
         lookUpByDate.addActionListener(this);
+        lookUpByDate.setEnabled(false);
         add(findAllByDate);
         findAllByDate.addActionListener(this);
+        findAllByDate.setEnabled(false);
         add(findAllByName);
         findAllByName.addActionListener(this);
+        findAllByName.setEnabled(false);
         add(removeButton);
         removeButton.addActionListener(this);
+        removeButton.setEnabled(false);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(720, 200);
@@ -123,6 +127,11 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         String message = "";
         if (event.getSource() == addR) {
             message = addEntry("generic");
+            // enable the other buttons once Add is clicked
+            lookUpByDate.setEnabled(true);
+            findAllByDate.setEnabled(true);
+            findAllByName.setEnabled(true);
+            removeButton.setEnabled(true);
         }
         if (event.getSource() == lookUpByDate) {
             message = lookupEntry();
