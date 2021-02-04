@@ -17,22 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author saemundur
  */
 public class CycleEntryTest {
-    
+
     public CycleEntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -132,14 +132,14 @@ public class CycleEntryTest {
         float result = instance.getDistance();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getTerrain method, of class CycleEntry.
      */
     @Test
     public void testGetTerrain() {
         System.out.println("getTerrain");
-        Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        CycleEntry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "asphalt";
         String result = instance.getTerrain();
         assertEquals(expResult, result);
@@ -151,12 +151,12 @@ public class CycleEntryTest {
     @Test
     public void testGetTempo() {
         System.out.println("getTempo");
-        Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        CycleEntry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "moderate";
         String result = instance.getTempo();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getEntry method, of class CycleEntry.
      */
@@ -168,5 +168,16 @@ public class CycleEntryTest {
         String result = instance.getEntry();
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Tests that the String provided is an example of a wrong output
+     */
+    @Test
+    public void testIncorrectOutput() {
+        CycleEntry cycleEntry = new CycleEntry("Jack", 01, 01, 2021, 01, 00, 00, 8, "asphalt", "moderate");
+        String wrong = "Jack cycled 8.0 km in     01:00:00 on 1/1/2021 on asphalt at moderate tempo\n";
+        String result = cycleEntry.getEntry();
+        assertNotEquals(wrong, result);
+    }
+
 }

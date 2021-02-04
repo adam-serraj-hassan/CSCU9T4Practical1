@@ -16,22 +16,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author saemundur
  */
 public class SwimEntryTest {
-    
+
     public SwimEntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -131,22 +131,22 @@ public class SwimEntryTest {
         float result = instance.getDistance();
         assertEquals(expResult, result, 0.0);
     }
-    
+
     /**
      * Test of getWhere method, of class SwimEntry
      */
     @Test
     public void testGetWhere() {
         System.out.println("getWhere");
-        Entry instanceA = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3,"outdoors");
+        SwimEntry instanceA = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3,"outdoors");
         String expResultA = "outdoors";
         String result = instanceA.getWhere();
         assertEquals(expResultA, result);
-        
-        Entry instanceB = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3,"pool");
+
+        SwimEntry instanceB = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3,"pool");
         String expResultB = "in a pool";
-        String result = instanceB.getWhere();
-        assertEquals(expResultB, result);
+        String resultB = instanceB.getWhere();
+        assertEquals(expResultB, resultB);
     }
     /**
      * Test of getEntry method, of class SwimEntry.
@@ -159,5 +159,16 @@ public class SwimEntryTest {
         String result = instance.getEntry();
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Tests that the String provided is an example of a wrong output
+     */
+    @Test
+    public void testIncorrectOutput() {
+        SwimEntry swimEntry = new SwimEntry("Jack", 01, 01, 2021, 01, 00, 00, 2, "outdoors");
+        String wrong = "Jack swam 8.0 km in     01:00:00 on 1/1/2021 on asphalt at moderate tempo\n";
+        String result = swimEntry.getEntry();
+        assertNotEquals(wrong, result);
+    }
+
 }

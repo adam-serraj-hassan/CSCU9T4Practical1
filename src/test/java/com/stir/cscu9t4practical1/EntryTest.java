@@ -144,5 +144,16 @@ public class EntryTest {
         String result = instance.getEntry();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Tests that the String provided is an example of a wrong output
+     */
+    @Test
+    public void testIncorrectOutput() {
+        Entry entry = new Entry("Bob", 01, 01, 2021, 01, 00, 00, 4);
+        String wrong = "Bob ran 4.0 km in     01:00:00 on 1/1/2021\n";
+        String result = entry.getEntry();
+        assertNotEquals(wrong, result);
+    }
     
 }

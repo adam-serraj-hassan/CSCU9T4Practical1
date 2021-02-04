@@ -22,11 +22,11 @@ public class TrainingRecordTest {
     }
     
     @BeforeAll
-    public void setUpClass() {
+    public static void setUpClass() {
     }
     
     @AfterAll
-    public void tearDownClass() {
+    public static void tearDownClass() {
     }
     
     @BeforeEach
@@ -136,11 +136,51 @@ public class TrainingRecordTest {
         int d = 1;
         int m = 2;
         int y = 2003;
-        // un-comment the lines below when you've implemented the method
-//        String resultSuccess = instance.lookupEntries(d,m,y);
-//        String resultNone = instance.lookupEntries(d,m,1999);
-//        assertEquals(expectResultsNone,resultNone);
-//        assertEquals(expectResults,resultSuccess);
+        String resultSuccess = instance.lookupEntries(d,m,y);
+        String resultNone = instance.lookupEntries(d,m,1999);
+        assertEquals(expectResultsNone,resultNone);
+        assertEquals(expectResults,resultSuccess);
+    }
+
+    /**
+     * Tests adding multiple entries of every type. The uniqueness doesn't matter in this case.
+     */
+    @Test
+    public void testAddMultipleEntries() {
+        TrainingRecord trainingRecord = new TrainingRecord();
+        for(int i = 0; i < 1000000; i++) {
+            Entry entry = new Entry("John", 10, 10, 2021, 03, 00, 00,
+                    6);
+            trainingRecord.addEntry(entry);
+        }
+        for(int i = 0; i < 1000000; i++) {
+            SprintEntry sprintEntry = new SprintEntry("Dave", 05, 05, 2020, 01,
+                    00, 00, 400, 20, 2);
+            trainingRecord.addSprintEntry(sprintEntry);
+        }
+        for(int i = 0; i < 1000000; i++) {
+            CycleEntry cycleEntry = new CycleEntry("Alan", 01, 02, 2020, 01,
+                    00, 00, 10, "rocky", "moderate");
+            trainingRecord.addCycleEntry(cycleEntry);
+        }
+        for(int i = 0; i < 1000000; i++) {
+            SwimEntry swimEntry = new SwimEntry("Jack", 06, 12, 2020, 1,
+                    00,00, 2, "outdoors");
+        }
+    }
+
+    /**
+     * Tests if same entry will be removed twice
+     */
+    @Test
+    public void testRemoveEntryTwice() {
+        TrainingRecord trainingRecord = new TrainingRecord();
+        Entry entry = new Entry("Bob", 01, 01, 2021, 01, 00, 00, 4);
+        trainingRecord.addEntry(entry);
+        trainingRecord.remove("Bob", 01, 01, 2021);
+        String actual = trainingRecord.remove("Bob", 01, 01, 2021);
+        String expected = "Entry was not found, so it couldn't be removed!";
+        assertEquals(expected, actual);
     }
     
 }
