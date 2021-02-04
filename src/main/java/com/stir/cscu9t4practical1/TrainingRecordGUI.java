@@ -128,7 +128,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             message = lookupEntry();
         }
         if (event.getSource() == findAllByDate) {
-            message = newLookupEntry();
+            message = lookupEntries();
         }
         if (event.getSource() == findAllByName) {
             message = findAllByName();
@@ -213,11 +213,11 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
      * day, month, and year
      * @return - Either an empty result or the entries found
      */
-    public String newLookupEntry() {
+    public String lookupEntries() {
         int m = Integer.parseInt(month.getText());
         int d = Integer.parseInt(day.getText());
         int y = Integer.parseInt(year.getText());
-        String message = myAthletes.newLookupEntry(d, m, y);
+        String message = myAthletes.lookupEntries(d, m, y);
         return message;
     }
 

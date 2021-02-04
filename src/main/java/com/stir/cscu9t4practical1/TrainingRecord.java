@@ -68,7 +68,7 @@ public class TrainingRecord {
      * @param y
      * @return - Either an empty result or the entries found
      */
-    public String newLookupEntry(int d, int m, int y) {
+    public String lookupEntries(int d, int m, int y) {
         ListIterator<Entry> iter = tr.listIterator();
         String result = "";
         while (iter.hasNext()) {
@@ -78,7 +78,7 @@ public class TrainingRecord {
                 result += current.getEntry() + "";
         }
         return result;
-    } // newLookupEntry
+    }
 
     /**
      * Checks if a record already exists based on the name, day, month, and year entries

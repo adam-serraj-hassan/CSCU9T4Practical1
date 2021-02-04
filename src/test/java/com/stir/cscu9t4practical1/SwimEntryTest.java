@@ -160,4 +160,15 @@ public class SwimEntryTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Tests that the String provided is an example of a wrong output
+     */
+    @Test
+    public void testIncorrectOutput() {
+        SwimEntry swimEntry = new SwimEntry("Jack", 01, 01, 2021, 01, 00, 00, 2, "outdoors");
+        String wrong = "Jack swam 8.0 km in     01:00:00 on 1/1/2021 on asphalt at moderate tempo\n";
+        String result = swimEntry.getEntry();
+        assertNotEquals(wrong, result);
+    }
+
 }

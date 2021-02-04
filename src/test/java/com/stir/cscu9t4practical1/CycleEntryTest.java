@@ -169,4 +169,15 @@ public class CycleEntryTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Tests that the String provided is an example of a wrong output
+     */
+    @Test
+    public void testIncorrectOutput() {
+        CycleEntry cycleEntry = new CycleEntry("Jack", 01, 01, 2021, 01, 00, 00, 8, "asphalt", "moderate");
+        String wrong = "Jack cycled 8.0 km in     01:00:00 on 1/1/2021 on asphalt at moderate tempo\n";
+        String result = cycleEntry.getEntry();
+        assertNotEquals(wrong, result);
+    }
+
 }

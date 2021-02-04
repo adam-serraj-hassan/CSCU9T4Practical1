@@ -168,4 +168,15 @@ public class SprintEntryTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Tests that the String provided is an example of a wrong output
+     */
+    @Test
+    public void testIncorrectOutput() {
+        SprintEntry sprintEntry = new SprintEntry("Bob", 01, 01, 2021, 01, 00, 00, 400, 10, 1);
+        String wrong = "Bob sprinted 10x400 km in     01:00:00 on 1/1/2021\n";
+        String result = sprintEntry.getEntry();
+        assertNotEquals(wrong, result);
+    }
+
 }
